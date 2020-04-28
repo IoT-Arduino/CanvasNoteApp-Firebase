@@ -32,9 +32,6 @@ module.exports = {
     },
     devtool: 'source-map',
     plugins: [
-        new Dotenv({
-            path: path.join(__dirname, '.env'),
-            silent: false
-        })
+        new Dotenv()
       ]
 }
