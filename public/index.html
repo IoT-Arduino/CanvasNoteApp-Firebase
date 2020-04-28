@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Canvas Notes App</title>
+
+    <link rel="stylesheet" href="./styles/style.css" />
+
+
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1 class="header__title">Canvas Notes App</h1>
+        <h2 class="header__subtitle">Firebase Version ( For SmartPhone )</h2>
+      </div>
+    </header>
+
+    <!-- start modal -->
+
+    <ul id="nav-mobile">
+      <li class="logged-in" id="userNameArea">User name</li>
+      <li class="logged-in" id="logout">Logout</li>
+      <li class="logged-out" id="login-open">Login</li>
+      <li class="logged-out" id="signup-open">Sign up</li>
+    </ul>
+
+    <!-- LOGIN MODAL -->
+    <div id="modal-login" class="modal">
+      <div class="modal-content">
+        <h4>Login</h4>
+        <br />
+        <form id="login-form">
+          <div class="input-field">
+            <label for="login-email">Email address</label><br />
+            <input type="email" id="login-email" required />
+
+          </div>
+          <div class="input-field">
+            <label for="login-password">Your password</label><br />
+            <input type="password" id="login-password" required />
+          </div>
+          <button class="mordal-btn">Login</button>
+        </form>
+      </div>
+      <button id="login-close" class="modalClose">閉じる</button>
+    </div>
+
+    <!-- SIGN UP MODAL -->
+    <div id="modal-signup" class="modal">
+      <div class="modal-content">
+        <h4>Sign up</h4>
+        <br />
+        <form id="signup-form">
+          <div class="input-field">
+            <label for="signup-email">Email address</label><br />
+            <input type="email" id="signup-email" required />
+          </div>
+          <div class="input-field">
+            <label for="signup-password">Choose password</label><br />
+            <input type="password" id="signup-password" required />
+          </div>
+          <button class="mordal-btn">Sign up</button>
+        </form>
+      </div>
+      <button id="signup-close" class="modalClose">閉じる</button>
+    </div>
+
+    <div class="mask" id="mask"></div>
+
+    <!-- end mordal -->
+
+    <div class="actions">
+      <div class="actions__container">
+        <input
+          id="searchText"
+          type="text"
+          class="input"
+          placeholder="Filter notes"
+        />
+        <select id="filterBy" class="dropdown">
+          <option value="updatedAt">更新日順</option>
+          <option value="createdAt">作成日順</option>
+          <option value="title">アルファベット順</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="notes"></div>
+    </div>
+
+    <div class="footer">
+      <button id="createNote" class="bottomButton">CanvasNoteを作成する</button>
+    </div>
+
+
+<script src="./scripts/index-bundle.js"></script>
+
+  </body>
+</html>

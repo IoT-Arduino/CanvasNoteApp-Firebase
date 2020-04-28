@@ -1,0 +1,370 @@
+/*  common  */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main-color: #43799c;
+  --sub-color:#396684;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+color: #333333;
+font-family: Helvetica, Arial, sans-serif;
+font-size: 1.6rem;
+border-left: 0.5px solid #dedfe0;
+border-right: 0.5px solid #dedfe0;
+max-width:500px;
+margin:0 auto 10px;
+}
+
+button {
+cursor: pointer;
+}
+
+a {
+  color: var(--sub-color);
+}
+
+/* Container */
+
+.container {
+max-width: 60rem;
+margin: 0 auto;
+padding: 0 1.6rem;
+}
+
+/* Header */
+
+.header {
+background: var(--main-color);
+color: white;
+padding: 1.6rem 0;
+}
+
+.header__title {
+font-size: 3.2rem;
+margin-bottom: .4rem;
+}
+
+.header__subtitle {
+font-size: 1.6rem;
+font-weight: 300;
+}
+
+.header a{
+  color:#fff;
+  text-decoration: none;
+}
+
+/* Login Bar */
+
+#nav-mobile {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+  margin:10px 0;
+}
+
+#modal-login{
+  opacity: 0;
+  visibility: hidden;
+}
+
+#modal-login.active{
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%,-50%) scale(1);
+}
+
+#modal-signup{
+  opacity: 0;
+  visibility: hidden;
+}
+
+#modal-signup.active{
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%,-50%) scale(1);
+}
+
+.mask.active{
+  opacity: 0.7;
+  visibility: visible;
+}
+
+.mask{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.3;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.modal {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%) scale(.9);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  min-width: 300px;
+  z-index: 2;
+  transition: 0.3s;
+}
+
+.modal h4{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.input-field input{
+  width: 90%;
+  line-height: 30px;
+  margin: 5px auto;
+}
+
+
+.input-field{
+  margin:10px auto;
+}
+
+.mordal-btn{
+  padding: 8px;
+}
+
+.logout-msg {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%) ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Actions Bar */
+
+.actions {
+  background-color: #F7F7F7;
+  border-bottom: 1px solid #dedfe0;
+  padding: .4rem
+}
+
+.actions__container {
+  align-items: center;
+  display: flex;
+  max-width: 60rem;
+  margin: 0 auto;
+  min-height: 3rem;
+  padding: 0 1.6rem;
+}
+
+.actions__container--spaced {
+  justify-content: space-between
+}
+
+/* Footer */
+.footer {
+  position: sticky;
+  left: 0;
+  bottom: 5px;
+}
+
+.bottomButton{
+  background: var(--main-color);
+  border: none;
+  border-radius: 0 8px 8px 0;
+  border-bottom: 2px solid var(--sub-color);
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 300;
+  padding: .8rem;
+  transition: background .3s ease;
+}
+
+
+
+
+
+
+
+/****** edit page *******/
+
+/* Form Inputs */
+
+.input {
+  border: 1px solid #DEDFE0;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  font-weight: 300;
+  height: 3rem;
+  margin-right: .8rem;
+  padding: .4rem .8rem;
+}
+
+.dropdown {
+  border-radius: 0;
+  border: 1px solid #DEDFE0;
+  background: white;
+  font-size: 1.4rem;
+  font-weight: 300;
+  height: 3rem;
+  margin-right: 0.8rem;
+}
+
+.button {
+  background: var(--main-color);
+  border: none;
+  border-bottom: 2px solid var(--sub-color);
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 300;
+  padding: .8rem;
+  transition: background .3s ease;
+}
+
+.button:hover {
+  background: var(--sub-color);
+}
+
+.button--secondary {
+  background: #888888;
+  border: none;
+  border-bottom: 2px solid #717171;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 300;
+  padding: .8rem;
+  transition: background .3s ease;
+}
+
+.button--secondary:hover {
+  background: #6E6E6E;
+}
+
+/* Note editor */
+
+.title-input {
+  border: 1px solid #DEDFE0;
+  font-size: 1.6rem;
+  font-weight: 300;
+  display: block;
+  margin: 1.4rem auto 0.6rem;
+  padding: .8rem;
+  width: 100%;
+}
+
+#last-edited{
+  display: none;
+}
+
+.body-input {
+  border: 1px solid #DEDFE0;
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 300;
+  display: block;
+  margin: 1.4rem 0 1rem;
+  min-height: 10rem;
+  padding: .8rem;
+  width: 100%;
+}
+
+.buttonArea{
+  display:flex;
+  justify-content: space-between;
+}
+
+button#remove-note.button{
+  display:block;
+  margin:0 10px 0 auto;
+}
+
+
+/* Note List Item */
+
+#notes{
+  min-height: 600px;
+}
+
+.list-item {
+  text-decoration: none;
+  color: #333333;
+  background: #F7F7F7;
+  border: 1px solid #dedfe0;
+  margin: 1.6rem 0;
+  padding: 1.6rem;
+  display: flex;
+  transition: background .3s ease;
+
+}
+
+.list-item:hover {
+  background: #eeeeee;
+}
+
+.list-item__button {
+  padding: 0.4rem;
+  color: #666;
+  font-size: 1.4rem;
+  font-weight: 600;
+  width:3rem;
+}
+.list-item__title {
+  font-size: 1.8rem;
+  margin: 0 1rem .2rem; 
+}
+
+
+.list-item__date {
+  margin:0 0 0 auto;
+}
+
+.empty-message {
+  text-align: center;
+  margin: 3.2rem 0;
+}
+
+/* canvas area */
+
+.canvas-container{
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+#canvasArea {
+  position: relative;
+  border:1px solid #e5e5e5;
+  margin:10px 10px 10px;
+}
+
+.canvasButton{
+  margin: 0 auto;
+}
