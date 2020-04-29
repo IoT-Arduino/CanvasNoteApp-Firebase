@@ -1,10 +1,6 @@
 const path = require('path')
 const Dotenv = require('dotenv-webpack')
 
-// require('dotenv').config({
-//     path:`.env`,
-//   })
-
 module.exports = {
     entry: {
         index: ['babel-polyfill','./src/index.js'],
