@@ -2,27 +2,22 @@ import { db, auth } from './firebase-init'
 import moment from 'moment'
 import  { generateLastEdited, generateLastEditedTop } from './notes-function'
 
-// db 接続テスト
-// db.collection('notes').onSnapshot(snapshot => {
-//     snapshot.forEach(doc => {
-//         console.log(doc.data())
-//     })
-// },function(error){
-//     console.log(error.message)
-// })
 
+const noteArea = document.getElementById('notes')
+const loggedOutLinks = document.querySelectorAll('.logged-out')
+const loggedInLinks = document.querySelectorAll('.logged-in')
+const userNameArea = document.getElementById('userNameArea')
+const signupForm = document.querySelector('#signup-form');
+const logout = document.querySelector('#logout')
+const loginForm = document.querySelector('#login-form')
 
 // sign up
-const signupForm = document.querySelector('#signup-form');
-
 signupForm.addEventListener('submit',(e)=>{
     e.preventDefault();
 
-    // get user info
     const email = signupForm['signup-email'].value
     const password = signupForm['signup-password'].value
 
-    // sign up the user
     auth.createUserWithEmailAndPassword(email,password).then(cred => {
         document.getElementById('modal-signup').classList.remove("active");
         document.getElementById('mask').classList.remove("active");
@@ -31,14 +26,12 @@ signupForm.addEventListener('submit',(e)=>{
 })
 
 // logout
-const logout = document.querySelector('#logout')
 logout.addEventListener('click',(e)=>{
     e.preventDefault();
     auth.signOut();
 })
 
 //login
-const loginForm = document.querySelector('#login-form')
 loginForm.addEventListener('submit',(e)=>{
     e.preventDefault();
 
@@ -53,16 +46,6 @@ loginForm.addEventListener('submit',(e)=>{
     })
 })
 
-
-
-//  ======= note-app.js 
-
-
-const noteArea = document.getElementById('notes')
-// let noteData = []
-const loggedOutLinks = document.querySelectorAll('.logged-out')
-const loggedInLinks = document.querySelectorAll('.logged-in')
-const userNameArea = document.getElementById('userNameArea')
 
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
@@ -89,7 +72,6 @@ auth.onAuthStateChanged(user => {
         })
     } else {
         setupUI()
-        // console.log('user logged out')
         setUpList([])
         document.getElementById('notes').innerHTML = `
             <h5 class="logout-msg" id="logout-msg" >Please login to add CanvasNote </h5>
@@ -270,7 +252,6 @@ const createNote = (user) => {
     
     })
 }
-
 
 
 // modal control
