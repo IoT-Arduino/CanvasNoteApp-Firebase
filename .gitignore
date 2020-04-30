@@ -1,2 +1,7 @@
 node_modules
+.*
 .env*
+.firebase*
+firestore.rules
+firebase.json
+firestore.indexes.json

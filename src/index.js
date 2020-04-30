@@ -67,8 +67,9 @@ const userNameArea = document.getElementById('userNameArea')
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
     if(user){
-        console.log('user logged in' , user.email)
-        db.collection('notes').onSnapshot(snapshot => {
+        console.log('user logged in' , user.uid)
+
+        db.collection('notes').where('createdBy', '==', user.uid).onSnapshot(snapshot => {
             setupUI(user)
 
             if(document.getElementById('logout-msg')){
