@@ -1,6 +1,6 @@
 import { db, auth } from './firebase-init'
 import moment from 'moment'
-import  { generateLastEdited, generateLastEditedTop } from './notes-function'
+import  { generateLastEdited, generateLastEditedTop, sortNotes } from './notes-function'
 
 
 const noteArea = document.getElementById('notes')
@@ -47,6 +47,7 @@ loginForm.addEventListener('submit',(e)=>{
 })
 
 
+
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
     if(user){
@@ -61,6 +62,7 @@ auth.onAuthStateChanged(user => {
 
             let changes = snapshot.docChanges()
             setUpList(changes)
+
             document.querySelector('.footer').innerHTML = `
                 <div class="footer">
                     <button id="createNote" class="bottomButton">CanvasNoteを作成する</button>
@@ -104,6 +106,8 @@ const setUpList = (changes) => {
         }
     })
 }
+
+
 
 
 const generateNoteDOM = (doc) => {
@@ -152,40 +156,156 @@ const filters = {
 }
 
 
-document.querySelector('#searchText').addEventListener('input',(e) => {
+document.querySelector('#searchText').addEventListener('input',async (e) => {
     filters.searchText = e.target.value
     filters.sortBy = e.target.nextElementSibling.value
 
     document.querySelector('#notes').innerHTML = ``
 
-    db.collection('notes').where("title",">=",filters.searchText).where('title','<=',filters.searchText + '\uf8ff').get().then((snapshot)=>{
-        snapshot.docs.forEach(doc=>{
-           
-            renderNoteDOM(doc,filters)
+        // 新しく作っている処理
+        const datasets = []
+        const user = auth.currentUser;
+        const snapshot = await db.collection('notes')
+        .where('createdBy', '==', user.uid)
+        .get();
+        snapshot.forEach(doc => {
+            const id  = doc.id
+            const data = doc.data()
+            // datasets[id] = data
+            datasets.push({
+                id,data
+            })
         })
-    })
+        console.log(datasets)
+
+        const filteredNotes = datasets.filter(function(item,index){
+            if((item.data.title).indexOf(filters.searchText)) return true
+
+            // regx でやってみる？
+        })
+
+        console.log(filteredNotes)
+
+        // renderFilteredNoteDOM(filteredNotes)
+    
+        // const filteredNotes = datasets.filter((dataset) => {
+        //     return datasets.title.toLowerCase().includes(filters.searchText.toLowerCase())
+        // })
+    
+        // console.log(filteredNotes)
+
+    // db.collection('notes').where("title",">=",filters.searchText).where('title','<=',filters.searchText + '\uf8ff').get().then((snapshot)=>{
+    //     snapshot.docs.forEach(doc=>{
+           
+    //         renderNoteDOM(doc,filters)
+    //     })
+    // })
 })
 
 
-document.querySelector('#filterBy').addEventListener('change',(e) => {
+
+document.querySelector('#filterBy').addEventListener('change', async (e) => {
     filters.searchText = e.target.previousElementSibling.value
     filters.sortBy = e.target.value
     document.querySelector('#notes').innerHTML = ``
 
-    if(filters.sortBy === 'title'){
-        db.collection('notes').orderBy(filters.sortBy).get().then((snapshot)=>{
-            snapshot.docs.forEach(doc=>{
-                renderNoteDOM(doc,filters)
-            })
+    // 新しく作っている処理
+    const notes = []
+    const user = auth.currentUser;
+    const snapshot = await db.collection('notes')
+    .where('createdBy', '==', user.uid)
+    .get();
+    snapshot.forEach(doc => {
+        const id  = doc.id
+        const note = doc.data()
+        notes.push({
+            id,note
         })
-    } else {
-        db.collection('notes').orderBy(filters.sortBy,"desc").get().then((snapshot)=>{
-            snapshot.docs.forEach(doc=>{
-                renderNoteDOM(doc,filters)
-            })
-        })
-    }
+    })
+
+    let sortBy = filters.sortBy
+
+
+    console.log(sortNotes(notes,sortBy))
+
+    renderNotes(notes,sortBy)
+
+    // if(filters.sortBy === 'title'){
+    //     db.collection('notes').orderBy(filters.sortBy).get().then((snapshot)=>{
+    //         snapshot.docs.forEach(doc=>{
+    //             renderNoteDOM(doc,filters)
+    //         })
+    //     })
+    // } else {
+    //     db.collection('notes').orderBy(filters.sortBy,"desc").get().then((snapshot)=>{
+    //         snapshot.docs.forEach(doc=>{
+    //             renderNoteDOM(doc,filters)
+    //         })
+    //     })
+    // }
+
 })
+
+
+// const renderFilteredNoteDOM = (note) => {
+//     const noteEl = document.createElement('div')
+//     const textEl = document.createElement('a')
+//     const button = document.createElement('button')
+//     const dateEl = document.createElement('div')
+
+//     // setup notelist and remove button
+//     noteEl.setAttribute('data-id',doc.id)
+//     noteEl.classList.add('list-item')
+//     noteEl.classList.add('container')
+//     button.classList.add('list-item__button')
+//     button.textContent = 'x'
+//     textEl.classList.add('list-item__title')
+//     dateEl.classList.add('list-item__date')
+//     // dateEl.textContent = generateLastEditedTop(note.updatedAt)
+
+//     button.addEventListener('click',(e) => {
+//         e.stopPropagation();
+//         let id = e.target.parentElement.getAttribute('data-id')
+//         db.collection('notes').doc(id).delete();
+//     })
+
+//     // setup the note title text
+//     if(note.title.length > 0) {
+//         textEl.textContent = note.title
+//     } else {
+//         textEl.textContent = 'Unnamed note'
+//     }
+
+//     noteEl.appendChild(button)
+//     textEl.setAttribute('href',`edit.html#${doc.id}`)
+//     noteEl.appendChild(textEl)
+
+//     document.querySelector('#notes').appendChild(noteEl)
+// }
+
+
+
+// Render application notes
+const renderNotes =  (notes,filters) => {
+
+    // notes.forEach(doc => {
+    //     console.log(doc.data())
+    // })
+
+    notes = sortNotes(notes, filters.sortBy)
+    console.log(notes)
+    // const filteredNotes = notes.filter((note) => {
+    //     return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
+    // })
+
+    document.querySelector("#notes").innerHTML = ''
+
+    notes.forEach((item) => {
+        document.querySelector("#notes").innerHTML += `${item.note.title}<br />`
+    })
+}
+
+
 
 
 const renderNoteDOM = (doc,filters) => {

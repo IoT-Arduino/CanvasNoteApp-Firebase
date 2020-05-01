@@ -1,63 +1,42 @@
 
 
-// sort
-// const sortNotes = (notes, sortBy) => {
-//     if(sortBy === 'byEdited'){
-//         return notes.sort( (a, b) => {
-//             if(a.updatedAt > b.updatedAt){
-//                 return -1
-//             } else if(a.updatedAt < b.updatedAt){
-//                 return 1
-//             } else {
-//                 return 0
-//             }
-//         })
-//     } else if(sortBy === 'byCreated'){
-//         return notes.sort((a, b) =>{
-//             if(a.createdAt > b.createdAt){
-//                 return -1
-//             } else if(a.createdAt < b.createdAt){
-//                 return 1
-//             } else {
-//                 return 0
-//             }
-//         })
-//     } else if(sortBy === 'alphabetical'){
-//         return notes.sort( (a, b) => {
-//             if(a.title.toLowerCase() < b.title.toLowerCase() ){
-//                 return -1  // a comes first
-//             } else if(a.title.toLowerCase() > b.title.toLowerCase() ){
-//                 return 1 // b comes first
-//             } else {
-//                 return 0
-//             }
-//         })
-//     } else {
-//         return notes
-//     }
-// }
+//sort
+const sortNotes = (notes, sortBy) => {
+    if(sortBy === 'updatedAt'){
+        return notes.sort( (a, b) => {
+            if(a.note.updatedAt > b.note.updatedAt){
+                return -1
+            } else if(a.note.updatedAt < b.note.updatedAt){
+                return 1
+            } else {
+                return 0
+            }
+        })
+    } else if(sortBy === 'createdAt'){
+        return notes.sort((a, b) =>{
+            if(a.note.createdAt > b.note.createdAt){
+                return -1
+            } else if(a.note.createdAt < b.note.createdAt){
+                return 1
+            } else {
+                return 0
+            }
+        })
+    } else if(sortBy === 'title'){
+        return notes.sort( (a, b) => {
+            if(a.note.title.toLowerCase() < b.note.title.toLowerCase() ){
+                return -1  // a comes first
+            } else if(a.note.title.toLowerCase() > b.note.title.toLowerCase() ){
+                return 1 // b comes first
+            } else {
+                return 0
+            }
+        })
+    } else {
+        return notes
+    }
+}
 
-
-// Render application notes
-// const renderNotes =  (notes,filters) => {
-
-//     notes.forEach(doc => {
-//         console.log(doc.data())
-//     })
-
-//     notes = sortNotes(notes, filters.sortBy)
-//     console.log(notes)
-//     const filteredNotes = notes.filter((note) => {
-//         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-//     })
-
-//     document.querySelector("#notes").innerHTML = ''
-
-//     filteredNotes.forEach((note) => {
-//         const noteEl =  generateNoteDOM(note)       
-//         document.querySelector('#notes').appendChild(noteEl)
-//     })
-// }
 
 
 
@@ -72,4 +51,4 @@ const generateLastEditedTop = (timestamp) => {
 
 
 
-export { generateLastEdited, generateLastEditedTop }
+export { generateLastEdited, generateLastEditedTop ,sortNotes }
