@@ -132,12 +132,29 @@ font-weight: 300;
   font-size: 20px;
 }
 
+.modalClose {
+  position: absolute;
+  top:0;
+  right:0;
+  padding: 8px 8px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.modalClose:hover{
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+
 .input-field input{
   width: 90%;
   line-height: 30px;
   margin: 5px auto;
 }
-
 
 .input-field{
   margin:10px auto;
@@ -153,19 +170,6 @@ font-weight: 300;
   left: 50%;
   transform: translate(-50%,-50%) ;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

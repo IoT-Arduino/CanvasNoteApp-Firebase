@@ -163,43 +163,29 @@ document.querySelector('#searchText').addEventListener('input',async (e) => {
     document.querySelector('#notes').innerHTML = ``
 
         // 新しく作っている処理
-        const datasets = []
+        const notes = []
         const user = auth.currentUser;
         const snapshot = await db.collection('notes')
         .where('createdBy', '==', user.uid)
         .get();
         snapshot.forEach(doc => {
             const id  = doc.id
-            const data = doc.data()
-            // datasets[id] = data
-            datasets.push({
-                id,data
+            const note = doc.data()
+            notes.push({
+                id,note
             })
         })
-        console.log(datasets)
 
-        const filteredNotes = datasets.filter(function(item,index){
-            if((item.data.title).indexOf(filters.searchText)) return true
-
-            // regx でやってみる？
+        const filteredNotes = notes.filter((item) => {
+            return item.note.title.toLowerCase().includes(filters.searchText.toLowerCase())
         })
 
-        console.log(filteredNotes)
+        document.querySelector("#notes").innerHTML = ''
 
-        // renderFilteredNoteDOM(filteredNotes)
-    
-        // const filteredNotes = datasets.filter((dataset) => {
-        //     return datasets.title.toLowerCase().includes(filters.searchText.toLowerCase())
-        // })
-    
-        // console.log(filteredNotes)
+        filteredNotes.forEach((item) => {
+            renderFilteredNoteDOM(item.note)
+        })
 
-    // db.collection('notes').where("title",">=",filters.searchText).where('title','<=',filters.searchText + '\uf8ff').get().then((snapshot)=>{
-    //     snapshot.docs.forEach(doc=>{
-           
-    //         renderNoteDOM(doc,filters)
-    //     })
-    // })
 })
 
 
@@ -225,83 +211,65 @@ document.querySelector('#filterBy').addEventListener('change', async (e) => {
 
     let sortBy = filters.sortBy
 
+    const filteredNotes = notes.filter((item) => {
+        return item.note.title.toLowerCase().includes(filters.searchText.toLowerCase())
+    })
+    const sortedNotes = sortNotes(filteredNotes,sortBy)
 
-    console.log(sortNotes(notes,sortBy))
+    renderNotes(sortedNotes,sortBy)
 
-    renderNotes(notes,sortBy)
-
-    // if(filters.sortBy === 'title'){
-    //     db.collection('notes').orderBy(filters.sortBy).get().then((snapshot)=>{
-    //         snapshot.docs.forEach(doc=>{
-    //             renderNoteDOM(doc,filters)
-    //         })
-    //     })
-    // } else {
-    //     db.collection('notes').orderBy(filters.sortBy,"desc").get().then((snapshot)=>{
-    //         snapshot.docs.forEach(doc=>{
-    //             renderNoteDOM(doc,filters)
-    //         })
-    //     })
-    // }
 
 })
 
 
-// const renderFilteredNoteDOM = (note) => {
-//     const noteEl = document.createElement('div')
-//     const textEl = document.createElement('a')
-//     const button = document.createElement('button')
-//     const dateEl = document.createElement('div')
+const renderFilteredNoteDOM = (note) => {
+    const noteEl = document.createElement('div')
+    const textEl = document.createElement('a')
+    const button = document.createElement('button')
+    const dateEl = document.createElement('div')
 
-//     // setup notelist and remove button
-//     noteEl.setAttribute('data-id',doc.id)
-//     noteEl.classList.add('list-item')
-//     noteEl.classList.add('container')
-//     button.classList.add('list-item__button')
-//     button.textContent = 'x'
-//     textEl.classList.add('list-item__title')
-//     dateEl.classList.add('list-item__date')
-//     // dateEl.textContent = generateLastEditedTop(note.updatedAt)
+    // setup notelist and remove button
+    noteEl.setAttribute('data-id',note.id)
+    noteEl.classList.add('list-item')
+    noteEl.classList.add('container')
+    button.classList.add('list-item__button')
+    button.textContent = 'x'
+    textEl.classList.add('list-item__title')
+    dateEl.classList.add('list-item__date')
+    // dateEl.textContent = generateLastEditedTop(note.updatedAt)
 
-//     button.addEventListener('click',(e) => {
-//         e.stopPropagation();
-//         let id = e.target.parentElement.getAttribute('data-id')
-//         db.collection('notes').doc(id).delete();
-//     })
+    button.addEventListener('click',(e) => {
+        e.stopPropagation();
+        let id = e.target.parentElement.getAttribute('data-id')
+        db.collection('notes').doc(id).delete();
+    })
 
-//     // setup the note title text
-//     if(note.title.length > 0) {
-//         textEl.textContent = note.title
-//     } else {
-//         textEl.textContent = 'Unnamed note'
-//     }
+    // setup the note title text
+    if(note.title.length > 0) {
+        textEl.textContent = note.title
+    } else {
+        textEl.textContent = 'Unnamed note'
+    }
 
-//     noteEl.appendChild(button)
-//     textEl.setAttribute('href',`edit.html#${doc.id}`)
-//     noteEl.appendChild(textEl)
+    noteEl.appendChild(button)
+    textEl.setAttribute('href',`edit.html#${note.id}`)
+    noteEl.appendChild(textEl)
 
-//     document.querySelector('#notes').appendChild(noteEl)
-// }
+    document.querySelector('#notes').appendChild(noteEl)
+}
 
 
 
 // Render application notes
 const renderNotes =  (notes,filters) => {
 
-    // notes.forEach(doc => {
-    //     console.log(doc.data())
-    // })
-
     notes = sortNotes(notes, filters.sortBy)
-    console.log(notes)
-    // const filteredNotes = notes.filter((note) => {
-    //     return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    // })
 
     document.querySelector("#notes").innerHTML = ''
 
     notes.forEach((item) => {
-        document.querySelector("#notes").innerHTML += `${item.note.title}<br />`
+        // document.querySelector("#notes").innerHTML += `${item.note.title}<br />`
+        renderFilteredNoteDOM(item.note)
     })
 }
 
