@@ -8,7 +8,7 @@
     <title>Canvas Notes App</title>
 
     <link rel="stylesheet" href="./styles/style.css" />
-
+    <link rel="icon" href="./images/favicon.ico">
 
   </head>
   <body>
@@ -33,11 +33,13 @@
       <div class="modal-content">
         <h4>Login</h4>
         <br />
+        <div class="login-error">
+          <span>ログインエラーです</span>
+        </div>
         <form id="login-form">
           <div class="input-field">
             <label for="login-email">Email address</label><br />
             <input type="email" id="login-email" required />
-
           </div>
           <div class="input-field">
             <label for="login-password">Your password</label><br />
@@ -45,6 +47,7 @@
           </div>
           <button class="mordal-btn">Login</button>
         </form>
+
       </div>
       <button id="login-close" class="modalClose">X</button>
     </div>

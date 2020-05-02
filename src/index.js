@@ -30,7 +30,11 @@ signupForm.addEventListener("submit", (e) => {
 // logout
 logout.addEventListener("click", (e) => {
   e.preventDefault()
-  auth.signOut()
+  auth.signOut().then(()=>{
+    console.log("signout")
+  }).catch(()=>{
+    console.log("error happened")
+  })
 })
 
 // login
@@ -44,12 +48,18 @@ loginForm.addEventListener("submit", (e) => {
     document.getElementById("modal-login").classList.remove("active")
     document.getElementById("mask").classList.remove("active")
     loginForm.reset()
+  }).catch(()=>{
+    document.querySelector('.login-error').classList.add('error')
+    document.getElementById('login-password').value = ``
+    console.log("login error")
   })
 })
 
 // listen for auth status changes
 auth.onAuthStateChanged((user) => {
   if (user) {
+    document.querySelector('.actions').style.display = "block"
+
     db.collection("notes")
       .where("createdBy", "==", user.uid)
       .onSnapshot(
@@ -77,6 +87,9 @@ auth.onAuthStateChanged((user) => {
   } else {
     setupUI()
     setUpList([])
+
+    document.querySelector('.actions').style.display = "none"
+
     document.getElementById("notes").innerHTML = `
             <h5 class="logout-msg" id="logout-msg" >Please login to add CanvasNote </h5>
         `
@@ -171,6 +184,8 @@ document.getElementById("signup-open").addEventListener("click", function() {
 document.getElementById("login-close").addEventListener("click", function() {
   document.getElementById("modal-login").classList.remove("active")
   document.getElementById("mask").classList.remove("active")
+  document.querySelector('.login-error').classList.remove('error')
+  loginForm.reset()
 })
 
 document.getElementById("signup-close").addEventListener("click", function() {

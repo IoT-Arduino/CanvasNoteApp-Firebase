@@ -70,7 +70,8 @@ font-weight: 300;
   display: flex;
   list-style-type: none;
   justify-content: space-around;
-  margin:10px 0;
+  padding:10px 0;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 #modal-login{
@@ -83,6 +84,17 @@ font-weight: 300;
   visibility: visible;
   transform: translate(-50%,-50%) scale(1);
 }
+
+.login-error{
+  display: none;
+  color: red;
+  text-align: center;
+}
+
+.login-error.error{
+  display: block;
+}
+
 
 #modal-signup{
   opacity: 0;
@@ -212,11 +224,6 @@ font-weight: 300;
   padding: .8rem;
   transition: background .3s ease;
 }
-
-
-
-
-
 
 
 /****** edit page *******/
