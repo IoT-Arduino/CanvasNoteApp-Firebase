@@ -250,7 +250,7 @@ font-weight: 300;
   color: white;
   font-size: 1.4rem;
   font-weight: 300;
-  padding: .8rem;
+  padding: .8rem 1.6rem .8rem 1.6rem;
   transition: background .3s ease;
 }
 
@@ -258,20 +258,7 @@ font-weight: 300;
   background: var(--sub-color);
 }
 
-.button--secondary {
-  background: #888888;
-  border: none;
-  border-bottom: 2px solid #717171;
-  color: white;
-  font-size: 1.4rem;
-  font-weight: 300;
-  padding: .8rem;
-  transition: background .3s ease;
-}
 
-.button--secondary:hover {
-  background: #6E6E6E;
-}
 
 /* Note editor */
 
@@ -285,9 +272,9 @@ font-weight: 300;
   width: 100%;
 }
 
-#last-edited{
-  display: none;
-}
+
+
+
 
 .body-input {
   border: 1px solid #DEDFE0;
@@ -371,4 +358,26 @@ button#remove-note.button{
 
 .canvasButton{
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button--secondary {
+  background: #888888;
+  border: none;
+  border-bottom: 2px solid #717171;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 300;
+  padding: .8rem;
+  transition: background .3s ease;
+}
+
+.button--secondary:hover {
+  background: #6E6E6E;
+}
+
+#last-edited{
+  display: inline-block;
+  padding:10px;
 }
