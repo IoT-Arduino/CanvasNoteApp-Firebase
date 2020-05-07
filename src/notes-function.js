@@ -39,7 +39,7 @@ const renderNoteDOM = (note, noteId) => {
     const noteEl = document.createElement("div")
     const textEl = document.createElement("a")
     const button = document.createElement("button")
-    const dateEl = document.createElement("div")
+    // const dateEl = document.createElement("div")
   
     noteEl.setAttribute("data-id", noteId)
     noteEl.classList.add("list-item")
@@ -47,7 +47,7 @@ const renderNoteDOM = (note, noteId) => {
     button.classList.add("list-item__button")
     button.textContent = "x"
     textEl.classList.add("list-item__title")
-    dateEl.classList.add("list-item__date")
+    // dateEl.classList.add("list-item__date")
   
     button.addEventListener("click", (e) => {
       e.stopPropagation()
@@ -82,7 +82,7 @@ const renderNotes = (notes, filters) => {
   })
 }
 
-//sort
+// sort notes
 const sortNotes = (notes, sortBy) => {
     if (sortBy === "updatedAt") {
       return notes.sort((a, b) => {
@@ -118,7 +118,6 @@ const sortNotes = (notes, sortBy) => {
       return notes
     }
   }
-
 
 
 // create createNote

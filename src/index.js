@@ -104,6 +104,7 @@ const filters = {
   sortBy: "byEdited",
 }
 
+// filter text input
 document.querySelector("#searchText").addEventListener("input", async (e) => {
   filters.searchText = e.target.value
   filters.sortBy = e.target.nextElementSibling.value
@@ -131,13 +132,16 @@ document.querySelector("#searchText").addEventListener("input", async (e) => {
       .includes(filters.searchText.toLowerCase())
   })
 
+
   document.querySelector("#notes").innerHTML = ""
 
   filteredNotes.forEach((item) => {
     renderNoteDOM(item.note, item.id)
   })
+
 })
 
+// sort select listener
 document.querySelector("#filterBy").addEventListener("change", async (e) => {
   filters.searchText = e.target.previousElementSibling.value
   filters.sortBy = e.target.value
@@ -157,14 +161,14 @@ document.querySelector("#filterBy").addEventListener("change", async (e) => {
       note,
     })
   })
-
-  let sortBy = filters.sortBy
-
+  
   const filteredNotes = notes.filter((item) => {
     return item.note.title
-      .toLowerCase()
-      .includes(filters.searchText.toLowerCase())
+    .toLowerCase()
+    .includes(filters.searchText.toLowerCase())
   })
+  
+  let sortBy = filters.sortBy
   const sortedNotes = sortNotes(filteredNotes, sortBy)
 
   renderNotes(sortedNotes, sortBy)

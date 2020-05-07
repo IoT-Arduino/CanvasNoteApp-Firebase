@@ -14,8 +14,8 @@ import { setupUI } from "./notes-function"
 
 // ======　edit page auth 関連 ======
 
-const userNameArea = document.getElementById("userNameArea")
-const loggedOutLinks = document.querySelectorAll(".logged-out")
+// const userNameArea = document.getElementById("userNameArea")
+// const loggedOutLinks = document.querySelectorAll(".logged-out")
 
 auth.onAuthStateChanged((user) => {
   if (user) {
