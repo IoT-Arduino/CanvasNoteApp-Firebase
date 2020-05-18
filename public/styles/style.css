@@ -33,6 +33,10 @@ a {
   color: var(--sub-color);
 }
 
+input, h5 {
+  font-size: 16px;
+}
+
 /* Container */
 
 .container {
@@ -199,7 +203,7 @@ a {
   top: 0;
   right: 0;
   padding: 8px 8px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   border: none;
   border-radius: 5px;
@@ -215,6 +219,7 @@ a {
   width: 90%;
   line-height: 30px;
   margin: 5px auto;
+  font-size: 16px;
 }
 
 .input-field {
@@ -223,6 +228,7 @@ a {
 
 .mordal-btn {
   padding: 8px;
+  font-size: 16px;
 }
 
 .logout-msg {
@@ -256,9 +262,10 @@ a {
 .list-item__button {
   padding: 4px;
   color: #666;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   width: 30px;
+  text-align: center;
 }
 .list-item__title {
   font-size: 18px;
@@ -278,7 +285,7 @@ a {
   border-radius: 0 8px 8px 0;
   border-bottom: 2px solid var(--sub-color);
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   padding: 8px;
   transition: background 0.3s ease;
@@ -318,10 +325,11 @@ a {
   border: none;
   border-bottom: 2px solid var(--sub-color);
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   padding: 8px 16px 8px 16px;
   transition: background 0.3s ease;
+  border-radius: 5px;
 }
 
 .button:hover {
@@ -349,7 +357,7 @@ button#remove-note.button {
 .canvasButton {
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .button--secondary {
@@ -357,10 +365,11 @@ button#remove-note.button {
   border: none;
   border-bottom: 2px solid #717171;
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
-  padding: 8px;
+  padding: 8px 18px;
   transition: background 0.3s ease;
+  border-radius: 5px;
 }
 
 .button--secondary:hover {
