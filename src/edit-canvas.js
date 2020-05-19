@@ -72,41 +72,55 @@ function resetCanvas() {
 }
 
 function saveCanvasData() {
-  const png = canvas.toDataURL()
+  db.collection("notes")
+    .doc(noteId)
+    .get()
+    .then((snapshot) => {
+      canvasItems = snapshot.data().canvas
+    })
+    .then(() => {
+      const png = canvas.toDataURL()
 
-  setTimeout(function() {
-    canvasItems.unshift({ png })
+      setTimeout(function() {
+        canvasItems.unshift({ png })
 
-    db.collection("notes")
-      .doc(noteId)
-      .update({
-        canvas: canvasItems,
-        updatedAt: moment().valueOf(),
-      })
+        db.collection("notes")
+          .doc(noteId)
+          .update({
+            canvas: canvasItems,
+            updatedAt: moment().valueOf(),
+          })
 
-    currentCanvas = 0
-    temp = []
-  }, 0)
+        currentCanvas = 0
+        temp = []
+      }, 0)
+    })
 }
 
 function prevCanvas() {
-  if (canvasItems.length > 0) {
-    temp.unshift(canvasItems.shift())
-
-    setTimeout(function() {
-      db.collection("notes")
-        .doc(noteId)
-        .update({
-          canvas: canvasItems,
-          updatedAt: moment().valueOf(),
-        })
-
-      resetCanvas()
+  db.collection("notes")
+    .doc(noteId)
+    .get()
+    .then((snapshot) => {
+      canvasItems = snapshot.data().canvas
+    })
+    .then(() => {
       if (canvasItems.length > 0) {
-        draw(canvasItems[0]["png"])
+        temp.unshift(canvasItems.shift())
+        setTimeout(function() {
+          db.collection("notes")
+            .doc(noteId)
+            .update({
+              canvas: canvasItems,
+              updatedAt: moment().valueOf(),
+            })
+          resetCanvas()
+          if (canvasItems.length > 0) {
+            draw(canvasItems[0]["png"])
+          }
+        }, 0)
       }
-    }, 0)
-  }
+    })
 }
 
 function nextCanvas() {

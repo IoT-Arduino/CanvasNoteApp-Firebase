@@ -14,9 +14,6 @@ import { setupUI } from "./notes-function"
 
 // ======　edit page auth 関連 ======
 
-// const userNameArea = document.getElementById("userNameArea")
-// const loggedOutLinks = document.querySelectorAll(".logged-out")
-
 auth.onAuthStateChanged((user) => {
   if (user) {
     setupUI(user)
@@ -31,29 +28,33 @@ const titleElement = document.querySelector("#note-title")
 const bodyElement = document.querySelector("#note-body")
 const removeElement = document.querySelector("#remove-note")
 const dateElement = document.querySelector("#last-edited")
-
 const noteId = location.hash.substring(1)
 
 if (noteId === undefined) {
   location.assign("index.html")
 }
 
-let canvasData = []
+let canvasItems = []
 
-db.collection("notes")
-  .doc(noteId)
-  .get()
-  .then((snapshot) => {
-    titleElement.value = snapshot.data().title
-    bodyElement.value = snapshot.data().body
-    canvasData = snapshot.data().canvas
-    dateElement.textContent = generateLastEdited(snapshot.data().updatedAt)
-  })
-  .then(() => {
-    if (canvasData.length > 0) {
-      draw(canvasData[0]["png"])
-    }
-  })
+const initEditPage = () => {
+  db.collection("notes")
+    .doc(noteId)
+    .get()
+    .then((snapshot) => {
+      titleElement.value = snapshot.data().title
+      bodyElement.value = snapshot.data().body
+      canvasItems = snapshot.data().canvas
+      dateElement.textContent = generateLastEdited(snapshot.data().updatedAt)
+    })
+    .then(() => {
+      if (canvasItems.length > 0) {
+        draw(canvasItems[0]["png"])
+      }
+    })
+}
+
+initEditPage()
+
 
 titleElement.addEventListener("blur", (e) => {
   db.collection("notes")
@@ -83,6 +84,7 @@ removeElement.addEventListener("click", (e) => {
     })
 })
 
+
 // ===== 手書きCanvas関連処理 ======
 
 const canvas = document.getElementById("canvasArea")
@@ -107,3 +109,7 @@ prevCan.addEventListener("click", function() {
 nextCan.addEventListener("click", function() {
   nextCanvas()
 })
+
+
+
+

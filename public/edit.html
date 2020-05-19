@@ -1,99 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CanvasNote Edit Page</title>
     <link rel="stylesheet" href="./styles/style.css" />
-    <link rel="icon" href="./images/favicon.ico">
-
-   
-</head>
-<body>
-
+    <link rel="icon" href="./images/favicon.ico" />
+  </head>
+  <body>
     <div class="header">
-        <div class="container">
-            <h1 class="header__title"><a href="index.html">Canvas Notes App</a></h1>
-        </div>
+      <div class="container">
+        <h1 class="header__title"><a href="index.html">Canvas Notes App</a></h1>
+      </div>
     </div>
 
-    
     <!-- start modal -->
 
     <ul id="nav-mobile">
-        <li class="logged-in" id="userNameArea">User name</li>
-        <li class="logged-in" id="logout">Logout</li>
-      </ul>
-  
-      <!-- LOGIN MODAL -->
-      <div id="modal-login" class="modal">
-        <div class="modal-content">
-          <h4>Login</h4>
-          <br />
-          <form id="login-form">
-            <div class="input-field">
-              <label for="login-email">Email address</label><br />
-              <input type="email" id="login-email" required />
-  
-            </div>
-            <div class="input-field">
-              <label for="login-password">Your password</label><br />
-              <input type="password" id="login-password" required />
-            </div>
-            <button class="mordal-btn">Login</button>
-          </form>
-        </div>
-        <button id="login-close" class="modalClose">閉じる</button>
+      <li class="logged-in" id="userNameArea">User name</li>
+      <li class="logged-in" id="logout">Logout</li>
+    </ul>
+
+    <!-- LOGIN MODAL -->
+    <div id="modal-login" class="modal">
+      <div class="modal-content">
+        <h4>Login</h4>
+        <br />
+        <form id="login-form">
+          <div class="input-field">
+            <label for="login-email">Email address</label><br />
+            <input type="email" id="login-email" required />
+          </div>
+          <div class="input-field">
+            <label for="login-password">Your password</label><br />
+            <input type="password" id="login-password" required />
+          </div>
+          <button class="mordal-btn">Login</button>
+        </form>
       </div>
-  
-      <!-- SIGN UP MODAL -->
-      <div id="modal-signup" class="modal">
-        <div class="modal-content">
-          <h4>Sign up</h4>
-          <br />
-          <form id="signup-form">
-            <div class="input-field">
-              <label for="signup-email">Email address</label><br />
-              <input type="email" id="signup-email" required />
-            </div>
-            <div class="input-field">
-              <label for="signup-password">Choose password</label><br />
-              <input type="password" id="signup-password" required />
-            </div>
-            <button class="mordal-btn">Sign up</button>
-          </form>
-        </div>
-        <button id="signup-close" class="modalClose">閉じる</button>
+      <button id="login-close" class="modalClose">閉じる</button>
+    </div>
+
+    <!-- SIGN UP MODAL -->
+    <div id="modal-signup" class="modal">
+      <div class="modal-content">
+        <h4>Sign up</h4>
+        <br />
+        <form id="signup-form">
+          <div class="input-field">
+            <label for="signup-email">Email address</label><br />
+            <input type="email" id="signup-email" required />
+          </div>
+          <div class="input-field">
+            <label for="signup-password">Choose password</label><br />
+            <input type="password" id="signup-password" required />
+          </div>
+          <button class="mordal-btn">Sign up</button>
+        </form>
       </div>
-  
-      <div class="mask" id="mask"></div>
-  
-      <!-- end mordal -->
+      <button id="signup-close" class="modalClose">閉じる</button>
+    </div>
+
+    <div class="mask" id="mask"></div>
+
+    <!-- end mordal -->
 
     <div class="container">
-        <input id="note-title" placeholder="Note Title" class="title-input">
+      <input id="note-title" placeholder="Note Title" class="title-input" />
     </div>
 
     <div class="canvas-container">
-        <canvas id="canvasArea" width="350" height="300"></canvas>
+      <canvas id="canvasArea" width="350" height="300"></canvas>
     </div>
 
     <div class="container canvasButton">
-        <button type="button" id="prevCanvas" class="button--secondary">戻る</button>
-        <button type="button" id="nextCanvas" class="button--secondary">進む</button>
+      <button type="button" id="prevCanvas" class="button--secondary">
+        戻る
+      </button>
+      <button type="button" id="nextCanvas" class="button--secondary">
+        進む
+      </button>
     </div>
-    
+
     <div class="container">
-        <textarea id="note-body" placeholder="Enter note text" class="body-input"></textarea>
-        <div class="buttonArea">
-            <a href="index.html"><button class="button">戻る（自動保存）</button></a>
-            <button id="remove-note" class="button">ノートの削除</button>
-        </div>
-        <div><p id="last-edited"></p></div>
+      <textarea
+        id="note-body"
+        placeholder="Enter note text"
+        class="body-input"
+      ></textarea>
+      <div class="buttonArea">
+        <a href="index.html"
+          ><button class="button">戻る（自動保存）</button></a
+        >
+        <button id="remove-note" class="button">ノートの削除</button>
+      </div>
+      <div><p id="last-edited"></p></div>
     </div>
 
-
-<script src="./scripts/edit-bundle.js"></script>
-    
-</body>
+    <script src="./scripts/edit-bundle.js"></script>
+  </body>
 </html>
