@@ -252,6 +252,7 @@ input, h5 {
   margin: 16px 0;
   padding: 16px;
   display: flex;
+  justify-content: space-between;
   transition: background 0.3s ease;
 }
 
@@ -259,17 +260,17 @@ input, h5 {
   background: #eeeeee;
 }
 
-.list-item__button {
+/* .list-item__button {
   padding: 4px;
   color: #666;
   font-size: 16px;
   font-weight: 600;
   width: 30px;
   text-align: center;
-}
+} */
 .list-item__title {
   font-size: 18px;
-  margin: 0 16px 2px;
+  margin: 0 16px;
 }
 
 /* Footer */

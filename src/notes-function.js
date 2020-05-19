@@ -38,14 +38,16 @@ const setUpList = (changes) => {
 const renderNoteDOM = (note, noteId) => {
     const noteEl = document.createElement("div")
     const textEl = document.createElement("a")
-    const button = document.createElement("button")
+    const button = document.createElement("div")
     // const dateEl = document.createElement("div")
   
     noteEl.setAttribute("data-id", noteId)
     noteEl.classList.add("list-item")
     noteEl.classList.add("container")
     button.classList.add("list-item__button")
-    button.textContent = "x"
+    button.innerHTML = `<span class="material-icons">
+    delete_forever
+    </span>`
     textEl.classList.add("list-item__title")
     // dateEl.classList.add("list-item__date")
   
@@ -63,9 +65,9 @@ const renderNoteDOM = (note, noteId) => {
       textEl.textContent = "Unnamed note"
     }
   
-    noteEl.appendChild(button)
     textEl.setAttribute("href", `edit.html#${noteId}`)
     noteEl.appendChild(textEl)
+    noteEl.appendChild(button)
   
     document.querySelector("#notes").appendChild(noteEl)
   }

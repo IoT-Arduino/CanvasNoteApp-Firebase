@@ -11,6 +11,7 @@ let currentCanvas
 let temp = []
 let canvasItems = []
 
+
 //ペンの初期値（サイズ、色）
 const defSize = 7
 const defColor = "#555"
