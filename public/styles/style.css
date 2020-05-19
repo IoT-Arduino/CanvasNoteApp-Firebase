@@ -260,14 +260,15 @@ input, h5 {
   background: #eeeeee;
 }
 
-/* .list-item__button {
-  padding: 4px;
-  color: #666;
-  font-size: 16px;
-  font-weight: 600;
-  width: 30px;
-  text-align: center;
-} */
+.list-item__button {
+  color: #396684;
+  cursor: pointer;
+}
+
+.list-item__button:hover {
+  opacity: 0.5;
+}
+
 .list-item__title {
   font-size: 18px;
   margin: 0 16px;

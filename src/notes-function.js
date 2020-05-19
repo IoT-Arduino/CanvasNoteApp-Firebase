@@ -44,16 +44,16 @@ const renderNoteDOM = (note, noteId) => {
     noteEl.setAttribute("data-id", noteId)
     noteEl.classList.add("list-item")
     noteEl.classList.add("container")
+    textEl.classList.add("list-item__title")
     button.classList.add("list-item__button")
     button.innerHTML = `<span class="material-icons">
     delete_forever
     </span>`
-    textEl.classList.add("list-item__title")
     // dateEl.classList.add("list-item__date")
   
     button.addEventListener("click", (e) => {
       e.stopPropagation()
-      let id = e.target.parentElement.getAttribute("data-id")
+      let id = e.target.parentElement.parentElement.getAttribute("data-id")
       db.collection("notes")
         .doc(id)
         .delete()
