@@ -8,6 +8,8 @@
 アプリurl : [CanvasNoteApp-Firebase](https://canvasnoteapp.web.app/) &nbsp;(サインイン必要)  
 コード解説記事 : [FirebaseとVanillaJavaScript で手書きノートアプリを作成](https://myfrontend.netlify.app/canvasnoteapp-firebase-1)
 
+![CanvasMemo](https://user-images.githubusercontent.com/45728258/103496022-0a44e600-4e80-11eb-8994-e77638d1ffcf.jpg)
+
 
 ## 💫 関連アプリケーションレポジトリ
 
